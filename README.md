@@ -10,20 +10,6 @@
 6. 情绪分析: 自动识别评论文本情绪倾向（积极/消极）                                       
 7. PDF 报告导出: 包含评分图、评分文本、情绪分析的完整可视化报告                                
 
-## 项目结构
-project/
-├── scripts/
-│   ├── main.py              # 项目入口
-│   ├── ui.py                # Gradio UI 主函数
-│   └── emotion_classifier.py# 情绪分析模块
-├── ttf/
-│   └── simsun.ttf           # 中文字体支持
-├── model/
-│   └── chinese_emotion_classify_model/  # 本地transformers模型
-├── utils/
-│   └── draw_score_bar.py    # 可视化评分绘图函数
-└── README.md                # 项目说明文档
-
 ## 安装依赖
 建议使用 Python 3.8+ 和虚拟环境：
 pip install -r requirements.txt
