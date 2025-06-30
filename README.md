@@ -29,7 +29,51 @@ python scripts/main.py
 或使用模块方式运行 UI：
 python -m scripts.main
 
+## 🤖 情绪分析模型说明
+
+本项目中的情绪分析模块基于 Hugging Face 提供的中文预训练模型：
+
+> [uer/roberta-base-finetuned-jd-binary-chinese](https://huggingface.co/uer/roberta-base-finetuned-jd-binary-chinese)
+
+该模型由 UER 团队在京东商品评论数据上进行二分类情感微调，适用于判断中文评论的“积极/消极”倾向。
+
+在此基础上，我们对其进行了二次微调，使用自定义的商品评论数据集进一步训练，使模型在本项目电商评论场景中的表现更为稳定和准确。
+
+### 📂 本地模型加载路径
+
+本地模型路径：`model/chinese_emotion_classify_model/`  
+包含 tokenizer 和 PyTorch 格式的分类模型，可通过 transformers 加载使用。
+
+### 📌 微调补充说明
+
+- 基础模型：`uer/roberta-base-finetuned-jd-binary-chinese`
+- 下游任务：二分类（积极 / 消极）
+- 自定义数据集规模：约 XXX 条中文商品评论（可自行填写）
+- 使用方式：transformers pipeline + 本地推理
+
+## 大语言模型（LLM）调用说明
+本项目部分自然语言处理任务（如综合评价生成、建议生成等）依赖于 OpenAI 的大语言模型 GPT-4o。
+
+部署时需配置有效的 OpenAI API Key
+
+推荐结合代理工具或本地部署控制请求频率与费用
+
+### 示例 API 调用代码：
+import openai
+
+openai.api_key = "your-api-key"
+
+response = openai.ChatCompletion.create(
+    model="gpt-4o",
+    messages=[
+        {"role": "system", "content": "你是一个商品评论分析助手"},
+        {"role": "user", "content": "请根据以下分析结果，生成综合评价与优化建议..."}
+    ]
+)
+
+
 ## 输出报告内容（PDF）
+
 自动生成内容包括：
 1. 图文一致性评分图
 2. 每一项一致性分析结果
